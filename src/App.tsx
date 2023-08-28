@@ -14,10 +14,10 @@ function App(): JSX.Element {
 	const [answers, setAnswers] = useState<Answer[]>([])
 	const CurrentQuestion = questions.preguntas[answers.length]
 
-	const handleRate = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleRate = (rating: Answer['valoracion']) => {
 		setAnswers(answers => answers.concat({
 			...CurrentQuestion,
-			valoracion: Number(e.target.value) as Answer['valoracion']
+			valoracion: Number(rating) as Answer['valoracion']
 		}))
 	}
 
@@ -37,14 +37,11 @@ function App(): JSX.Element {
 		<>
 			<h1>Holi ☆★</h1>
 			<p>{CurrentQuestion.texto}</p>
-			<select onChange={handleRate}>
-				<option value='1'>1</option>
-				<option value='2'>2</option>
-				<option value='3'>3</option>
-				<option value='4'>4</option>
-				<option value='5'>5</option>
-			</select>
-			{/* 			<span>{'★'.repeat(3).padEnd(5, '☆')}</span>	 */}
+			<div>
+				{'★'.repeat(3).padEnd(5, '☆').split('').map((i, index) => 
+					<span key={index} onClick={() => handleRate((index + 1) as Answer['valoracion'])}>{i}</span>
+				)}
+			</div>
 		</>
 	)
 }
