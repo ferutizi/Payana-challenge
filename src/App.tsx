@@ -37,11 +37,12 @@ function App(): JSX.Element {
 
 	return (
 		<>
-			<h1>Holi ☆★</h1>
-			<p>{CurrentQuestion.texto}</p>
-			<div>
+			<h1 className='text-5xl font-bold m-12'>Payana</h1>
+			<p className='text-xl font-medium'>{CurrentQuestion.texto}</p>
+			<div className='m-2'>
 				{'★'.repeat(hoverValue).padEnd(5, '☆').split('').map((i, index) => 
 					<span
+						className='text-3xl m-1 font-medium cursor-pointer'
 						key={index}
 						onClick={() => handleRate((index + 1) as Answer['valoracion'])}
 						onMouseOver={() => setHoverValue((index + 1) as Answer['valoracion'])}
