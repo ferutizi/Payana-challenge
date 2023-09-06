@@ -25,10 +25,10 @@ function App(): JSX.Element {
 
 	if (!CurrentQuestion) {
 		return(
-			<ul>
+			<ul className='max-w-xl mx-auto m-12'>
 				{answers.map(item => (
-					<li key={item.id}>
-						{item.texto} - {item.valoracion}
+					<li className='text-xl font-small p-2 text-left' key={item.id}>
+						{item.texto} - <span className='text-yellow-400'>{'★'.repeat(item.valoracion).padEnd(5, '☆')}</span>
 					</li>
 				))}
 			</ul>
@@ -42,7 +42,7 @@ function App(): JSX.Element {
 			<div className='m-2'>
 				{'★'.repeat(hoverValue).padEnd(5, '☆').split('').map((i, index) => 
 					<span
-						className='text-3xl m-1 font-medium cursor-pointer'
+						className='text-3xl m-1 font-medium cursor-pointer text-yellow-400'
 						key={index}
 						onClick={() => handleRate((index + 1) as Answer['valoracion'])}
 						onMouseOver={() => setHoverValue((index + 1) as Answer['valoracion'])}
