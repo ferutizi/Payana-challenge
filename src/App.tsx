@@ -10,8 +10,10 @@ interface Question {
 interface Answer extends Question {
 	valoracion: 1 | 2 | 3 | 4 | 5
 }
+
 function App(): JSX.Element {
 	const [answers, setAnswers] = useState<Answer[]>([])
+	const [hoverValue, setHoverValue] = useState(0)
 	const CurrentQuestion = questions.preguntas[answers.length]
 
 	const handleRate = (rating: Answer['valoracion']) => {
@@ -38,8 +40,13 @@ function App(): JSX.Element {
 			<h1>Holi ☆★</h1>
 			<p>{CurrentQuestion.texto}</p>
 			<div>
-				{'★'.repeat(3).padEnd(5, '☆').split('').map((i, index) => 
-					<span key={index} onClick={() => handleRate((index + 1) as Answer['valoracion'])}>{i}</span>
+				{'★'.repeat(hoverValue).padEnd(5, '☆').split('').map((i, index) => 
+					<span
+						key={index}
+						onClick={() => handleRate((index + 1) as Answer['valoracion'])}
+						onMouseOver={() => setHoverValue((index + 1) as Answer['valoracion'])}
+					>{i}
+					</span>
 				)}
 			</div>
 		</>
